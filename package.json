@@ -10,13 +10,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
     "axios": "^1.6.7",
+    "css-loader": "^6.10.0",
     "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "next": "^14.1.0",
     "next-connect": "^1.0.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "style-loader": "^3.3.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",

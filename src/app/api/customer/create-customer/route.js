@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../lib/mongo';
+import { connectToDatabase } from '../../../_lib/mongo';
 
-export const GET = async (request, response) => {
+export const POST = async (request, response) => {
        try {
         const db = await connectToDatabase();
+        const requestData = await request.json();
+        console.log('requestData', requestData);
         const collection = db.collection('customers');
         const data = await collection.find({}).toArray() || [];
         console.log('Data fetched from MongoDB:', data); // Server-side logging
         return NextResponse.json({
-            data: data
+            data: requestData
         },{
             status: 200
         })
