@@ -1,5 +1,6 @@
 import './styles.css';
 import { constants } from '@/app/_common'
+import { InputField } from '@/app/_components'
 
 export const metadata = {
     title: `Login`,
@@ -22,10 +23,12 @@ export default function Login() {
             <div className='flex flex-1 flex-col justify-center'>
                 <span>{welcomeBack}</span>
                 <span>{loginSubTitle}</span>
-                <input />
-                <input />
+                <InputField/>
+                <InputField/>
                 <button />
+                <span>Forgot Password</span>
             </div>
+           
         </div>
     </div>
 }
