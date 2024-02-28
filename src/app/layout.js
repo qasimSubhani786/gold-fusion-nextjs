@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
     isActive: true,
     icon: ``,
     navigationUrl: `/`,
-    childComponent: Orders
+    childComponent: Dashboard
   },
   {
     id: 2,

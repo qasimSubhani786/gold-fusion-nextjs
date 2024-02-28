@@ -57,6 +57,13 @@ export const dashboardBadges = [
     }
 ]
 
+export const fieldTypes = {
+    text: `text`,
+    status: `status`,
+    action: `action`,
+    labelledText: `labelledText`
+}
+
 export const orderHeaders = [
   {
     name: "Item",
