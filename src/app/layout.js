@@ -1,9 +1,11 @@
 'use client'
 import { Inter } from "next/font/google";
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import "./globals.css";
 import { Header, NavMenu } from "./_components";
-import Dashboard from "./(pages)/page";
+import Dashboard from "./(pages)/(dashboard)/dashboard.js";
+import Orders from "./(pages)/(dashboard)/orders.js";
+import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,40 +16,71 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
 
+  const pathname = usePathname();
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const [navigationItemsList, setNavigationItemsList] = useState([{
     id: 1,
     name: 'Dashboad',
     isActive: true,
     icon: ``,
-    navigationUrl: `/`
+    navigationUrl: `/`,
+    childComponent: Orders
   },
   {
     id: 2,
     name: 'Orders',
     isActive: false,
     icon: ``,
-    navigationUrl: `/orders`
+    navigationUrl: `/orders`,
+    childComponent: Orders
   },
   {
     id: 3,
     name: 'Customers',
     isActive: false,
     icon: ``,
-    navigationUrl: `/customers`
+    navigationUrl: `/customers`,
+    childComponent: Dashboard
   },
   {
     id: 4,
     name: 'Manage Staff',
     isActive: false,
     icon: ``,
-    navigationUrl: `/manage-staff`
+    navigationUrl: `/manage-staff`,
+    childComponent: Dashboard
   }]);
+
+  useEffect(() => {
+    const tempList = [];
+    navigationItemsList.map((item, index) => {
+      tempList.push({
+        ...item,
+        isActive: selectedIndex == index
+      })
+    })
+    setNavigationItemsList(tempList);
+  },[selectedIndex])
+
+  useEffect(() => {
+    setSelectedIndex(navigationItemsList.findIndex(item => item.navigationUrl === pathname) || 0)
+  },[])
+
+  const renderComponent = () => {
+    const DesiredComponent = navigationItemsList[selectedIndex]?.childComponent
+    return <DesiredComponent />
+  }
 
   return (
     <html lang="en">
       <Header />
-      <NavMenu navigationItemsList={navigationItemsList}/>
-      <Dashboard />
+      <NavMenu 
+        navigationItemsList={navigationItemsList}
+        onClick={(index) => {
+          setSelectedIndex(index)
+        }}/>
+        {renderComponent()}
+      {/* <Dashboard /> */}
       <body className={inter.className}>{children}</body>
     </html>
   );

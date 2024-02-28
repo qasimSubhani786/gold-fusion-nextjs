@@ -16,10 +16,22 @@ module.exports = {
       },
       colors: {
         "background": "#F9F9F9",
-        "theme": "#D8B14C"
+        "theme": "#D8B14C",
+        "pending": "#F39C12",
+        "pendingBackground": "rgba(243, 156, 18, 0.1)",
+        "processing": "#00C0EF",
+        "processingBackground": "rgba(0, 191, 239, 0.1)",
+        "complete": "#00A65A",
+        "completeBackground": "rgba(0, 166, 91,0.1)"
       },
       borderColor: {
 
+      },
+      flex: {
+        '2': '2 2 0%'
+      },
+      height: {
+        '128': '40rem',
       }
     },
   },
