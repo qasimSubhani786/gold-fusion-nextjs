@@ -2,6 +2,8 @@
 import { useEffect } from "react";
 import axios from "axios";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Script from "next/script";
 
 export default function Home() {
 
@@ -20,6 +22,10 @@ export default function Home() {
   };
 
   return (
-    <> </>
+    <>
+      <Script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" crossOrigin="anonymous"/>
+      <Script src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js" crossOrigin="anonymous" />
+      <Script src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js" crossOrigin="anonymous" />
+     </>
   );
 }

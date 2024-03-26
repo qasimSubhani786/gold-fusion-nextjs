@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { fieldTypes } from "../_common";
 import { StatusBadge } from "./statusBadge";
-import { Pagination } from "./pagination";
+import { PaginationLayout } from "./pagination";
 import { MdMoreVert } from "react-icons/md";
 import {
   Dropdown,
@@ -100,8 +100,8 @@ export const CustomTable = ({ columns, keyField, data }) => {
       </div>
       {paginationCount > 1 && (
         <div className="h-20 w-full border flex justify-center items-center">
-          <Pagination
-            items={data.length} // 100
+          <PaginationLayout
+            items={180} // 100
             currentPage={selectedPage} // 1
             pageSize={10} // 10
             onPageChange={onPageChange}

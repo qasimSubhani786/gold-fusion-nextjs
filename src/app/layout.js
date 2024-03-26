@@ -1,11 +1,13 @@
-'use client'
+"use client";
 import { Inter } from "next/font/google";
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./globals.css";
 import { Header, NavMenu } from "./_components";
 import Dashboard from "./(pages)/(dashboard)/dashboard.js";
 import Orders from "./(pages)/(dashboard)/orders.js";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
+import Customers from "./(pages)/(dashboard)/customers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,73 +17,80 @@ const inter = Inter({ subsets: ["latin"] });
 // };
 
 export default function RootLayout({ children }) {
-
   const pathname = usePathname();
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [navigationItemsList, setNavigationItemsList] = useState([{
-    id: 1,
-    name: 'Dashboad',
-    isActive: true,
-    icon: ``,
-    navigationUrl: `/`,
-    childComponent: Dashboard
-  },
-  {
-    id: 2,
-    name: 'Orders',
-    isActive: false,
-    icon: ``,
-    navigationUrl: `/orders`,
-    childComponent: Orders
-  },
-  {
-    id: 3,
-    name: 'Customers',
-    isActive: false,
-    icon: ``,
-    navigationUrl: `/customers`,
-    childComponent: Dashboard
-  },
-  {
-    id: 4,
-    name: 'Manage Staff',
-    isActive: false,
-    icon: ``,
-    navigationUrl: `/manage-staff`,
-    childComponent: Dashboard
-  }]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [navigationItemsList, setNavigationItemsList] = useState([
+    {
+      id: 1,
+      name: "Dashboad",
+      isActive: true,
+      icon: ``,
+      navigationUrl: `/`,
+      childComponent: Dashboard,
+    },
+    {
+      id: 2,
+      name: "Orders",
+      isActive: false,
+      icon: ``,
+      navigationUrl: `/orders`,
+      childComponent: Orders,
+    },
+    {
+      id: 3,
+      name: "Customers",
+      isActive: false,
+      icon: ``,
+      navigationUrl: `/customers`,
+      childComponent: Customers,
+    },
+    {
+      id: 4,
+      name: "Manage Staff",
+      isActive: false,
+      icon: ``,
+      navigationUrl: `/manage-staff`,
+      childComponent: Dashboard,
+    },
+  ]);
 
   useEffect(() => {
     const tempList = [];
     navigationItemsList.map((item, index) => {
       tempList.push({
         ...item,
-        isActive: selectedIndex == index
-      })
-    })
+        isActive: selectedIndex == index,
+      });
+    });
     setNavigationItemsList(tempList);
-  },[selectedIndex])
+  }, [selectedIndex]);
 
   useEffect(() => {
-    setSelectedIndex(navigationItemsList.findIndex(item => item.navigationUrl === pathname) || 0)
-  },[])
+    setSelectedIndex(
+      navigationItemsList.findIndex(
+        (item) => item.navigationUrl === pathname
+      ) || 0
+    );
+  }, []);
 
   const renderComponent = () => {
-    const DesiredComponent = navigationItemsList[selectedIndex]?.childComponent
-    return <DesiredComponent />
-  }
+    const DesiredComponent = navigationItemsList[selectedIndex]?.childComponent;
+    return <DesiredComponent />;
+  };
 
   return (
     <html lang="en">
       <Header />
-      <NavMenu 
+      <NavMenu
         navigationItemsList={navigationItemsList}
         onClick={(index) => {
-          setSelectedIndex(index)
-        }}/>
-        {renderComponent()}
+          setSelectedIndex(index);
+        }}
+      />
+            <body className={inter.className}>{children}</body>
+      {navigationItemsList[selectedIndex] && renderComponent()}
       {/* <Dashboard /> */}
-      <body className={inter.className}>{children}</body>
+
     </html>
   );
 }
